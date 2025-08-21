@@ -9,9 +9,9 @@ st.set_page_config(
 # 글자 스타일만 적용하는 CSS
 custom_css = """
 <style>
-/* 모든 글자에 연한 은하 그라데이션 적용 */
+/* 모든 글자에 밝은 파랑 그라데이션 적용 */
 .stMarkdown h1, .stMarkdown p {
-    background: linear-gradient(45deg, #1C4177, #3C638E, #5C88B7, #7CA8E0, #A7D8FF);
+    background: linear-gradient(45deg, #00C0FF, #87CEEB, #B0E0E6, #ADD8E6, #E0FFFF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none; /* 그림자 효과 제거 */
