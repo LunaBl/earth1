@@ -17,13 +17,15 @@ body {
     color: #ADD8E6;
 }
 
+/* 가장 바깥쪽 컨테이너에 배경색 적용 및 컨텐츠가 위에 오도록 설정 */
 .stApp {
     background-color: #000;
     position: relative;
-    overflow: hidden; /* 별이 튀어나가지 않게 */
+    overflow: hidden;
+    color: white; /* 텍스트 색상을 기본적으로 흰색으로 설정하여 보이게 함 */
 }
 
-/* 별 반짝임 효과 */
+/* 별 반짝임 효과 (CSS 애니메이션) */
 .stApp::before {
     content: "";
     position: absolute;
@@ -43,13 +45,12 @@ body {
     100% { opacity: 0.2; }
 }
 
-
 /* 모든 글자에 은하 그라데이션 적용 */
 .stMarkdown, h1, h2, h3 {
     background: linear-gradient(45deg, #00BFFF, #1E90FF, #00BFFF, #87CEFA, #4682B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5), 0 0 20px rgba(0, 191, 255, 0.3); /* 글자 그림자 추가 */
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5), 0 0 20px rgba(0, 191, 255, 0.3);
 }
 
 /* 제목 스타일 (추가적인 크기/위치 조정) */
@@ -58,6 +59,8 @@ body {
     font-weight: 600;
     text-align: center;
     padding-top: 50px;
+    position: relative;
+    z-index: 10; /* 글자가 배경보다 위에 오도록 z-index 설정 */
 }
 
 /* 텍스트 스타일 */
@@ -66,6 +69,8 @@ body {
     text-align: center;
     margin-top: 20px;
     line-height: 1.6;
+    position: relative;
+    z-index: 10;
 }
 
 /* 버튼 컨테이너: 버튼을 중앙으로 정렬 */
@@ -73,6 +78,8 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    position: relative;
+    z-index: 10;
 }
 
 /* 버튼 스타일 */
