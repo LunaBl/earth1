@@ -11,10 +11,10 @@ custom_css = """
 <style>
 /* 모든 글자에 밝은 파랑 그라데이션 적용 */
 .stMarkdown h1, .stMarkdown p {
-    background: linear-gradient(45deg, #00C0FF, #87CEEB, #B0E0E6, #ADD8E6, #E0FFFF);
+    background: linear-gradient(to right, #00BFFF, #87CEFA, #4682B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: none; /* 그림자 효과 제거 */
+    text-shadow: 0 0 15px rgba(135, 206, 250, 0.7); /* 글자 그림자 추가 */
 }
 
 /* 버튼 스타일은 기본값으로 유지 */
