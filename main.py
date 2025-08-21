@@ -11,20 +11,45 @@ custom_css = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+/* 전체 페이지 기본 스타일 */
 body {
     font-family: 'Poppins', sans-serif;
     color: #ADD8E6;
 }
 
 .stApp {
-    background-color: #000; /* 배경색을 검은색으로 강제 적용 */
+    background-color: #000;
+    position: relative;
+    overflow: hidden; /* 별이 튀어나가지 않게 */
 }
 
-/* 모든 제목과 글자에 은하 그라데이션 적용 */
+/* 별 반짝임 효과 */
+.stApp::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' d='M1 0h1v1H1V0zm1 1h1v1H2V1zM0 2h1v1H0V2zm2 2h1v1H2V4z'/%3E%3C/svg%3E") repeat;
+    opacity: 0.6;
+    animation: star-glow 6s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes star-glow {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.2; }
+}
+
+
+/* 모든 글자에 은하 그라데이션 적용 */
 .stMarkdown, h1, h2, h3 {
     background: linear-gradient(45deg, #00BFFF, #1E90FF, #00BFFF, #87CEFA, #4682B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5), 0 0 20px rgba(0, 191, 255, 0.3); /* 글자 그림자 추가 */
 }
 
 /* 제목 스타일 (추가적인 크기/위치 조정) */
@@ -43,6 +68,13 @@ body {
     line-height: 1.6;
 }
 
+/* 버튼 컨테이너: 버튼을 중앙으로 정렬 */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
 /* 버튼 스타일 */
 .stButton>button {
     background-color: transparent !important;
@@ -55,7 +87,6 @@ body {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     text-shadow: 0 0 10px #00BFFF;
-    margin: 20px auto;
     display: block;
 }
 
@@ -64,12 +95,6 @@ body {
     color: #000 !important;
     box-shadow: 0 0 20px #00BFFF;
     transform: scale(1.05);
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
 }
 </style>
 """
