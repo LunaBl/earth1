@@ -1,6 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
 # 페이지 설정
 st.set_page_config(
@@ -69,7 +70,7 @@ if st.session_state.page == "main":
 # 별의 진화 페이지
 elif st.session_state.page == "star_evolution":
     st.markdown("<h1>💫<span> 별의 진화 시뮬레이터</span></h1>", unsafe_allow_html=True)
-    st.markdown("<p>🔭<span> 별의 질량을 조절하고, '진화 시작' 버튼을 눌러 그 운명을 확인해 보세요.</span></p>", unsafe_allow_html=True)
+    st.markdown("<p>🔭<span> 별의 질량과 진화 성공 확률을 조절하고, '진화 시작' 버튼을 눌러 그 운명을 확인해 보세요.</span></p>", unsafe_allow_html=True)
 
     # --- 별의 속성 조절 ---
     st.sidebar.markdown("<h2>⭐<span> 별의 속성</span></h2>", unsafe_allow_html=True)
@@ -81,8 +82,16 @@ elif st.session_state.page == "star_evolution":
         step=0.1
     )
     
+    evolution_success_rate = st.sidebar.slider(
+        "진화 성공 확률 (%)", 
+        min_value=0, 
+        max_value=100, 
+        value=100, 
+        step=1
+    )
+
     # --- 시뮬레이션 ---
-    st.markdown("<h2>🌠<span> 별의 진화 과정</span></h2>", unsafe_allow_html=True)
+    st.subheader("🌠<span> 별의 진화 과정</span>")
 
     # 별의 상태를 저장할 딕셔너리
     star_state = {
@@ -110,66 +119,72 @@ elif st.session_state.page == "star_evolution":
 
     # --- 애니메이션 및 결과 표시 ---
     if st.button("🚀 진화 시작"):
-        # 질량에 따른 진화 시뮬레이션
-        if star_mass <= 8:
-            star_state['phase'] = '적색 거성'
-            star_state['temp'] = 3500
-            star_state['size'] = 500
-            star_state['luminosity'] = 100
-            star_state['desc'] = '수소를 소진하고 헬륨 핵융합을 시작하며 크게 팽창합니다.'
-            st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
-            
-            # Matplotlib으로 별 그리기
-            fig, ax = plt.subplots(figsize=(6, 6))
-            ax.set_facecolor('black')
-            ax.set_aspect('equal')
-            ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color=star_state['color']))
-            ax.set_xlim(-8, 8)
-            ax.set_ylim(-8, 8)
-            plt.axis('off')
-            st.pyplot(fig)
-            
-            st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
-            st.write("---")
-
-            star_state['phase'] = '행성상 성운 및 백색 왜성'
-            star_state['temp'] = 100000
-            star_state['size'] = 50
-            star_state['luminosity'] = 0.01
-            st.info(f"**진화 단계:** {star_state['phase']}", icon="💫")
-            st.markdown(f"<p><span>외피를 날려보내고 중심핵만 남은 **백색 왜성**이 됩니다.</span></p>", unsafe_allow_html=True)
-            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="저/중질량 별의 진화 과정")
-            
+        # 확률에 따른 진화 성공/실패 결정
+        if random.randint(1, 100) > evolution_success_rate:
+            st.error("💥 **진화 실패!** 이 별은 불안정하여 생을 마감했습니다.", icon="❗")
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="별의 진화가 실패하면 다양한 형태로 붕괴할 수 있습니다.")
         else:
-            star_state['phase'] = '적색 초거성'
-            star_state['temp'] = 3500
-            star_state['size'] = 1000
-            star_state['luminosity'] = 10000
-            star_state['desc'] = '수소를 소진하고 크게 팽창하여 적색 초거성이 됩니다.'
-            st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
+            # 질량에 따른 진화 시뮬레이션
+            if star_mass <= 8:
+                star_state['phase'] = '적색 거성'
+                star_state['temp'] = 3500
+                star_state['size'] = 500
+                star_state['luminosity'] = 100
+                star_state['desc'] = '수소를 소진하고 헬륨 핵융합을 시작하며 크게 팽창합니다.'
+                st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
+                
+                # Matplotlib으로 별 그리기
+                fig, ax = plt.subplots(figsize=(6, 6))
+                ax.set_facecolor('black')
+                ax.set_aspect('equal')
+                ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color=star_state['color']))
+                ax.set_xlim(-8, 8)
+                ax.set_ylim(-8, 8)
+                plt.axis('off')
+                st.pyplot(fig)
+                
+                st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
+                st.write("---")
 
-            fig, ax = plt.subplots(figsize=(6, 6))
-            ax.set_facecolor('black')
-            ax.set_aspect('equal')
-            ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color=star_state['color']))
-            ax.set_xlim(-15, 15)
-            ax.set_ylim(-15, 15)
-            plt.axis('off')
-            st.pyplot(fig)
-            
-            st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
-            st.write("---")
+                star_state['phase'] = '행성상 성운 및 백색 왜성'
+                star_state['temp'] = 100000
+                star_state['size'] = 50
+                star_state['luminosity'] = 0.01
+                st.info(f"**진화 단계:** {star_state['phase']}", icon="💫")
+                st.markdown(f"<p><span>외피를 날려보내고 중심핵만 남은 **백색 왜성**이 됩니다.</span></p>", unsafe_allow_html=True)
+                st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="저/중질량 별의 진화 과정")
+                
+            else:
+                star_state['phase'] = '적색 초거성'
+                star_state['temp'] = 3500
+                star_state['size'] = 1000
+                star_state['luminosity'] = 10000
+                star_state['desc'] = '수소를 소진하고 크게 팽창하여 적색 초거성이 됩니다.'
+                st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
 
-            star_state['phase'] = '초신성 폭발'
-            st.info(f"**진화 단계:** {star_state['phase']}", icon="🔥")
-            st.markdown(f"<p><span>격렬한 **초신성 폭발**을 일으키고, 질량에 따라 중성자별 또는 블랙홀이 됩니다.</span></p>", unsafe_allow_html=True)
-            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Massive_star_evolution_kor.svg/1280px-Massive_star_evolution_kor.svg.png", caption="고질량 별의 진화 과정")
+                fig, ax = plt.subplots(figsize=(6, 6))
+                ax.set_facecolor('black')
+                ax.set_aspect('equal')
+                ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color=star_state['color']))
+                ax.set_xlim(-15, 15)
+                ax.set_ylim(-15, 15)
+                plt.axis('off')
+                st.pyplot(fig)
+                
+                st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
+                st.write("---")
+
+                star_state['phase'] = '초신성 폭발'
+                st.info(f"**진화 단계:** {star_state['phase']}", icon="🔥")
+                st.markdown(f"<p><span>격렬한 **초신성 폭발**을 일으키고, 질량에 따라 중성자별 또는 블랙홀이 됩니다.</span></p>", unsafe_allow_html=True)
+                st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Massive_star_evolution_kor.svg/1280px-Massive_star_evolution_kor.svg.png", caption="고질량 별의 진화 과정")
     
     st.write("---")
     
     # 별의 현재 상태 정보
     st.markdown("<h2>ℹ️<span> 별의 현재 정보</span></h2>", unsafe_allow_html=True)
     st.write(f"**질량:** 태양의 {star_mass}배")
+    st.write(f"**진화 성공 확률:** {evolution_success_rate}%")
     st.write(f"**상대적 크기:** {star_state['size']}배")
     st.write(f"**표면 온도:** {star_state['temp']}K")
     st.write(f"**광도:** 태양의 {star_state['luminosity']}배")
