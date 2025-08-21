@@ -11,7 +11,7 @@ custom_css = """
 <style>
 /* 모든 글자에 연한 은하 그라데이션 적용 */
 .stMarkdown h1, .stMarkdown p {
-    background: linear-gradient(45deg, #A8C0FF, #E1F0FF, #A8C0FF, #B8E0FF);
+    background: linear-gradient(45deg, #1C4177, #3C638E, #5C88B7, #7CA8E0, #A7D8FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none; /* 그림자 효과 제거 */
