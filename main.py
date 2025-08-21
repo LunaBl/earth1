@@ -134,7 +134,7 @@ elif st.session_state.page == "star_evolution":
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
                 
                 # ➡️➡️➡️ 여기에 정확한 파일 이름과 확장자를 넣어주세요!
-                st.image('my_red_giant.jpg', caption="적색 거성으로 진화한 별의 모습")
+                st.image('red-giant-star.png', caption="적색 거성으로 진화한 별의 모습")
                 st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
