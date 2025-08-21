@@ -134,7 +134,7 @@ elif st.session_state.page == "star_evolution":
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
                 
                 # 적색 거성 이미지 삽입
-                st.image('http://googleusercontent.com/image_collection/image_retrieval/9241059147177262348_0')
+                st.image('my_red_giant.jpg', caption="적색 거성으로 진화한 별의 모습")
                 st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
