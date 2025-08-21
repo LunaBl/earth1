@@ -133,8 +133,8 @@ elif st.session_state.page == "star_evolution":
                 star_state['desc'] = '수소를 소진하고 헬륨 핵융합을 시작하며 크게 팽창합니다.'
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
                 
-                # 적색 거성 이미지 삽입
-                st.image('red-giant-star.png', caption="적색 거성으로 진화한 별의 모습")
+                # ➡️➡️➡️ 여기에 정확한 파일 이름과 확장자를 넣어주세요!
+                st.image('my_red_giant.jpg', caption="적색 거성으로 진화한 별의 모습")
                 st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
