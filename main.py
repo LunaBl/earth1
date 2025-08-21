@@ -91,7 +91,7 @@ elif st.session_state.page == "star_evolution":
     )
 
     # --- 시뮬레이션 ---
-    st.subheader("🌠<span> 별의 진화 과정</span>")
+    st.markdown("<h2>🌠<span> 별의 진화 과정</span></h2>", unsafe_allow_html=True)
 
     # 별의 상태를 저장할 딕셔너리
     star_state = {
@@ -134,10 +134,7 @@ elif st.session_state.page == "star_evolution":
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
                 
                 # 적색 거성 이미지 삽입
-                st.image('
-
-http://googleusercontent.com/image_collection/image_retrieval/9241059147177262348_0
-')
+                st.image('http://googleusercontent.com/image_collection/image_retrieval/9241059147177262348_0')
                 st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
