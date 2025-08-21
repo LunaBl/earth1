@@ -10,21 +10,11 @@ st.set_page_config(
 custom_css = """
 <style>
 /* 모든 글자에 파랑-보라 그라데이션 적용 */
-.stMarkdown h1 span, .stMarkdown p span {
+.stMarkdown h1, .stMarkdown p {
     background: linear-gradient(45deg, #00BFFF, #6A5ACD, #8A2BE2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
-}
-
-/* 이모티콘에는 그라데이션 적용하지 않음 */
-.stMarkdown h1, .stMarkdown p {
-    -webkit-text-fill-color: initial;
-    background: none;
-    text-shadow: none;
-}
-.stMarkdown h1::before, .stMarkdown p::before {
-    -webkit-text-fill-color: initial;
 }
 
 /* 버튼 스타일을 수정하여 더 잘 보이게 만듭니다 */
@@ -60,17 +50,17 @@ if "page" not in st.session_state:
 
 # 메인 페이지
 if st.session_state.page == "main":
-    st.markdown("<h1>✨<span> 별의 신비</span></h1>", unsafe_allow_html=True)
+    st.markdown("<h1>✨ 별의 신비</h1>", unsafe_allow_html=True)
     st.markdown("<div>", unsafe_allow_html=True)
     if st.button("🌌 별의 진화"):
         st.session_state.page = "star_evolution"
     st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("<p>🚀<span> 우주의 광활함 속에서 빛나는 별들의 이야기를 탐험해 보세요.</span></p>", unsafe_allow_html=True)
+    st.markdown("<p>🚀 우주의 광활함 속에서 빛나는 별들의 이야기를 탐험해 보세요.</p>", unsafe_allow_html=True)
 
 # 별의 진화 페이지
 elif st.session_state.page == "star_evolution":
-    st.markdown("<h1>💫<span> 별의 진화 시뮬레이션</span></h1>", unsafe_allow_html=True)
-    st.markdown("<p>🔭<span> 아래 슬라이더를 조절하여 별의 진화 과정이 어떻게 달라지는지 확인해 보세요.</span></p>", unsafe_allow_html=True)
+    st.markdown("<h1>💫 별의 진화 시뮬레이션</h1>", unsafe_allow_html=True)
+    st.markdown("<p>🔭 아래 슬라이더를 조절하여 별의 진화 과정이 어떻게 달라지는지 확인해 보세요.</p>", unsafe_allow_html=True)
 
     # --- 별의 속성 조절 버튼 (슬라이더) ---
     st.sidebar.title("⭐ 별의 속성")
@@ -98,20 +88,20 @@ elif st.session_state.page == "star_evolution":
     st.sidebar.markdown("---")
 
     # --- 애니메이션 및 결과 표시 ---
-    st.subheader("🌠<span> 별의 진화 과정</span>")
+    st.subheader("🌠 별의 진화 과정")
 
     # 별의 질량에 따라 진화 경로를 결정
     if star_mass <= 8:
-        st.markdown(f"<p><span>선택된 별의 질량은 태양의 {star_mass}배입니다. 이 별은 **저/중질량 별**의 진화 과정을 거칩니다.</span></p>", unsafe_allow_html=True)
+        st.markdown(f"<p>선택된 별의 질량은 태양의 {star_mass}배입니다. 이 별은 **저/중질량 별**의 진화 과정을 거칩니다.</p>", unsafe_allow_html=True)
         st.write("진화 단계: 성운 → 주계열성 → 적색 거성 → 행성상 성운 → 백색 왜성")
         st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="저/중질량 별의 진화 과정")
     else:
-        st.markdown(f"<p><span>선택된 별의 질량은 태양의 {star_mass}배입니다. 이 별은 **고질량 별**의 진화 과정을 거칩니다.</span></p>", unsafe_allow_html=True)
+        st.markdown(f"<p>선택된 별의 질량은 태양의 {star_mass}배입니다. 이 별은 **고질량 별**의 진화 과정을 거칩니다.</p>", unsafe_allow_html=True)
         st.write("진화 단계: 성운 → 주계열성 → 적색 초거성 → 초신성 폭발 → 중성자별 또는 블랙홀")
         st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Massive_star_evolution_kor.svg/1280px-Massive_star_evolution_kor.svg.png", caption="고질량 별의 진화 과정")
 
     # 별의 속성에 따른 설명 추가
-    st.subheader("ℹ️<span> 별의 현재 속성</span>")
+    st.subheader("ℹ️ 별의 현재 속성")
     st.write(f"**질량:** 태양의 {star_mass}배")
     st.write(f"**온도:** {star_temp}K")
     st.write(f"**중력:** {star_gravity}g")
