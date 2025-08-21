@@ -146,7 +146,7 @@ def show_star_evolution_page():
                 st.info(f"**진화 단계:** {st.session_state.star_info['name']}", icon="💥")
                 
                 # 적색 거성 이미지 삽입
-                st.image('red-giant-star.png', caption="적색 거성으로 진화한 별의 모습")
+                st.image('redgiantstar.png', caption="적색 거성으로 진화한 별의 모습")
                 st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
