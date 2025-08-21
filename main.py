@@ -20,28 +20,27 @@ body {
     background-color: #000; /* 배경색을 검은색으로 강제 적용 */
 }
 
-/* 제목 스타일 - 파란색 그라데이션 */
+/* 모든 제목과 글자에 은하 그라데이션 적용 */
+.stMarkdown, h1, h2, h3 {
+    background: linear-gradient(45deg, #00BFFF, #1E90FF, #00BFFF, #87CEFA, #4682B4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 제목 스타일 (추가적인 크기/위치 조정) */
 .main-title, .star-title {
     font-size: 4rem;
     font-weight: 600;
     text-align: center;
-    background: linear-gradient(90deg, #00BFFF, #1E90FF, #00BFFF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     padding-top: 50px;
-    z-index: 2;
-    position: relative;
 }
 
 /* 텍스트 스타일 */
 .intro-text, .star-text {
     font-size: 1.2rem;
     text-align: center;
-    color: #ADD8E6;
     margin-top: 20px;
     line-height: 1.6;
-    z-index: 2;
-    position: relative;
 }
 
 /* 버튼 스타일 */
@@ -58,8 +57,6 @@ body {
     text-shadow: 0 0 10px #00BFFF;
     margin: 20px auto;
     display: block;
-    z-index: 2;
-    position: relative;
 }
 
 .stButton>button:hover {
@@ -69,17 +66,10 @@ body {
     transform: scale(1.05);
 }
 
-.stMarkdown {
-    z-index: 2;
-    position: relative;
-}
-
 .button-container {
     display: flex;
     justify-content: center;
     margin-top: 40px;
-    z-index: 2;
-    position: relative;
 }
 </style>
 """
