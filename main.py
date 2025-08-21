@@ -13,8 +13,8 @@ custom_css = """
 
 body {
     font-family: 'Poppins', sans-serif;
-    color: #00BFFF;
-    background: #000;
+    color: #ADD8E6;
+    background: #000; /* 배경을 순수한 검은색으로 설정 */
 }
 
 /* 제목 스타일 */
@@ -82,15 +82,11 @@ body {
 """
 
 # 커스텀 CSS 적용
-st.image("background.jpg", use_container_width=True)
+st.markdown(custom_css, unsafe_allow_html=True)
 
 # 페이지 상태 관리
 if "page" not in st.session_state:
     st.session_state.page = "main"
-
-# 배경 이미지
-# st.image를 사용하여 이미지 표시 (상대 경로로 이미지 파일을 지정)
-st.image("background.jpg", use_column_width=True)
 
 # 메인 페이지
 if st.session_state.page == "main":
