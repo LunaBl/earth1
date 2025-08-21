@@ -133,16 +133,11 @@ elif st.session_state.page == "star_evolution":
                 star_state['desc'] = '수소를 소진하고 헬륨 핵융합을 시작하며 크게 팽창합니다.'
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
                 
-                # Matplotlib으로 별 그리기
-                fig, ax = plt.subplots(figsize=(6, 6))
-                ax.set_facecolor('black')
-                ax.set_aspect('equal')
-                ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color=star_state['color']))
-                ax.set_xlim(-8, 8)
-                ax.set_ylim(-8, 8)
-                plt.axis('off')
-                st.pyplot(fig)
-                
+                # 적색 거성 이미지 삽입
+                st.image('
+
+http://googleusercontent.com/image_collection/image_retrieval/9241059147177262348_0
+')
                 st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
@@ -162,6 +157,7 @@ elif st.session_state.page == "star_evolution":
                 star_state['desc'] = '수소를 소진하고 크게 팽창하여 적색 초거성이 됩니다.'
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
 
+                # Matplotlib으로 별 그리기
                 fig, ax = plt.subplots(figsize=(6, 6))
                 ax.set_facecolor('black')
                 ax.set_aspect('equal')
