@@ -17,9 +17,9 @@ body {
     background: #000;
 }
 
-/* 배경 이미지 및 효과 */
+/* 배경 이미지 및 효과 - 로컬 파일(background.jpg) 사용 */
 .stApp {
-    background: url("https://images.unsplash.com/photo-1536697204961-da157f12e879?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzODczODZ8MHwxfHNlYXJjaHwxNXx8c3RhcnJ5JTIwbmlnaHQlMjBza3klMjBibGFja3xlbnwxfHx8fHwxNzIyNjQ2ODQxfDA&ixlib=rb-4.0.3&q=80&w=1080") no-repeat center center fixed;
+    background: url("background.jpg") no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }
