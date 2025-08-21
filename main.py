@@ -53,20 +53,20 @@ if "page" not in st.session_state:
 
 # 메인 페이지
 if st.session_state.page == "main":
-    st.title("✨ 별의 신비")
+    st.title("별의 신비")
     st.markdown("<div>", unsafe_allow_html=True)
-    if st.button("🌌 별의 진화"):
+    if st.button("별의 진화"):
         st.session_state.page = "star_evolution"
     st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("<p>🚀 우주의 광활함 속에서 빛나는 별들의 이야기를 탐험해 보세요.</p>", unsafe_allow_html=True)
+    st.markdown("<p>우주의 광활함 속에서 빛나는 별들의 이야기를 탐험해 보세요.</p>", unsafe_allow_html=True)
 
 # 별의 진화 페이지
 elif st.session_state.page == "star_evolution":
-    st.title("💫 별의 진화 시뮬레이터")
-    st.markdown("<p>🔭 별의 질량을 조절하고, '진화 시작' 버튼을 눌러 그 운명을 확인해 보세요.</p>", unsafe_allow_html=True)
+    st.title("별의 진화 시뮬레이터")
+    st.markdown("<p>별의 질량을 조절하고, '진화 시작' 버튼을 눌러 그 운명을 확인해 보세요.</p>", unsafe_allow_html=True)
 
     # --- 별의 속성 조절 ---
-    st.sidebar.title("⭐ 별의 속성")
+    st.sidebar.title("별의 속성")
     star_mass = st.sidebar.slider(
         "별의 질량 (태양 질량 단위)", 
         min_value=0.5, 
@@ -76,7 +76,7 @@ elif st.session_state.page == "star_evolution":
     )
     
     # --- 시뮬레이션 ---
-    st.subheader("🌠 별의 진화 과정")
+    st.subheader("별의 진화 과정")
 
     # 별의 상태를 저장할 딕셔너리
     star_state = {
