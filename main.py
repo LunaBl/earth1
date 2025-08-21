@@ -58,4 +58,18 @@ def star_evolution_page():
     st.markdown("<h2 class='galaxy-sub-gradient'>저질량 별의 진화</h2>", unsafe_allow_html=True)
     st.write("성운 → 주계열성 → 적색 거성 → 행성상 성운 → 백색 왜성")
     
-    st.markdown("<h2 class='galaxy-sub-gradient'>고질량 별의 진
+    st.markdown("<h2 class='galaxy-sub-gradient'>고질량 별의 진화</h2>", unsafe_allow_html=True)
+    # 아래 줄의 문자열을 완성했습니다.
+    st.write("성운 → 주계열성 → 초거성 → 초신성 폭발 → 중성자별 또는 블랙홀")
+    
+    if st.button("뒤로가기"):
+        st.session_state.page = "main"
+
+# 페이지 라우팅 로직
+if "page" not in st.session_state:
+    st.session_state.page = "main"
+
+if st.session_state.page == "main":
+    main_page()
+elif st.session_state.page == "star_evolution":
+    star_evolution_page()
