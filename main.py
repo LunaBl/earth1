@@ -82,7 +82,7 @@ body {
 """
 
 # 커스텀 CSS 적용
-st.markdown(custom_css, unsafe_allow_html=True)
+st.image("background.jpg", use_container_width=True)
 
 # 페이지 상태 관리
 if "page" not in st.session_state:
