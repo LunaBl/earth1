@@ -14,32 +14,10 @@ custom_css = """
 body {
     font-family: 'Poppins', sans-serif;
     color: #ADD8E6;
-    background: #000;
 }
 
-/* 별과 은하 테마 배경 효과 */
 .stApp {
-    background: #000; /* 순수 검은색 배경 */
-    /* 별 반짝임 효과 */
-    background-image:
-        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 100px 10px, #eee, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 10px 100px, #fff, rgba(0,0,0,0));
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    animation: galaxy-move 120s linear infinite;
-    position: relative;
-}
-
-@keyframes galaxy-move {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 2000px 1000px;
-    }
+    background-color: #000; /* 배경색을 검은색으로 강제 적용 */
 }
 
 /* 제목 스타일 - 파란색 그라데이션 */
