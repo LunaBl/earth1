@@ -11,13 +11,19 @@ st.set_page_config(
 # 글자와 버튼 스타일만 적용하는 CSS
 custom_css = """
 <style>
-/* 모든 제목 글자에 파랑-보라 그라데이션 적용 */
-h1, h2, h3 {
+/* 글자 부분에만 그라데이션 적용 */
+.stMarkdown h1 span, .stMarkdown p span, .stMarkdown h2 span, .stMarkdown h3 span {
     background: linear-gradient(45deg, #00BFFF, #6A5ACD, #8A2BE2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
-    font-weight: bold;
+}
+
+/* 이모티콘은 그라데이션 적용하지 않음 (부모 태그의 기본 스타일) */
+.stMarkdown h1, .stMarkdown p, .stMarkdown h2, .stMarkdown h3 {
+    -webkit-text-fill-color: initial;
+    background: none;
+    text-shadow: none;
 }
 
 /* 버튼 스타일을 수정하여 더 잘 보이게 만듭니다 */
@@ -53,20 +59,20 @@ if "page" not in st.session_state:
 
 # 메인 페이지
 if st.session_state.page == "main":
-    st.title("별의 신비")
+    st.markdown("<h1>✨<span> 별의 신비</span></h1>", unsafe_allow_html=True)
     st.markdown("<div>", unsafe_allow_html=True)
-    if st.button("별의 진화"):
+    if st.button("🌌 별의 진화"):
         st.session_state.page = "star_evolution"
     st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("<p>우주의 광활함 속에서 빛나는 별들의 이야기를 탐험해 보세요.</p>", unsafe_allow_html=True)
+    st.markdown("<p>🚀<span> 우주의 광활함 속에서 빛나는 별들의 이야기를 탐험해 보세요.</span></p>", unsafe_allow_html=True)
 
 # 별의 진화 페이지
 elif st.session_state.page == "star_evolution":
-    st.title("별의 진화 시뮬레이터")
-    st.markdown("<p>별의 질량을 조절하고, '진화 시작' 버튼을 눌러 그 운명을 확인해 보세요.</p>", unsafe_allow_html=True)
+    st.markdown("<h1>💫<span> 별의 진화 시뮬레이터</span></h1>", unsafe_allow_html=True)
+    st.markdown("<p>🔭<span> 별의 질량을 조절하고, '진화 시작' 버튼을 눌러 그 운명을 확인해 보세요.</span></p>", unsafe_allow_html=True)
 
     # --- 별의 속성 조절 ---
-    st.sidebar.title("별의 속성")
+    st.sidebar.markdown("<h2>⭐<span> 별의 속성</span></h2>", unsafe_allow_html=True)
     star_mass = st.sidebar.slider(
         "별의 질량 (태양 질량 단위)", 
         min_value=0.5, 
@@ -76,7 +82,7 @@ elif st.session_state.page == "star_evolution":
     )
     
     # --- 시뮬레이션 ---
-    st.subheader("별의 진화 과정")
+    st.markdown("<h2>🌠<span> 별의 진화 과정</span></h2>", unsafe_allow_html=True)
 
     # 별의 상태를 저장할 딕셔너리
     star_state = {
@@ -123,7 +129,7 @@ elif st.session_state.page == "star_evolution":
             plt.axis('off')
             st.pyplot(fig)
             
-            st.markdown(f"<p>{star_state['desc']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
             st.write("---")
 
             star_state['phase'] = '행성상 성운 및 백색 왜성'
@@ -131,7 +137,7 @@ elif st.session_state.page == "star_evolution":
             star_state['size'] = 50
             star_state['luminosity'] = 0.01
             st.info(f"**진화 단계:** {star_state['phase']}", icon="💫")
-            st.markdown(f"<p>외피를 날려보내고 중심핵만 남은 **백색 왜성**이 됩니다.</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><span>외피를 날려보내고 중심핵만 남은 **백색 왜성**이 됩니다.</span></p>", unsafe_allow_html=True)
             st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="저/중질량 별의 진화 과정")
             
         else:
@@ -151,18 +157,18 @@ elif st.session_state.page == "star_evolution":
             plt.axis('off')
             st.pyplot(fig)
             
-            st.markdown(f"<p>{star_state['desc']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><span>{star_state['desc']}</span></p>", unsafe_allow_html=True)
             st.write("---")
 
             star_state['phase'] = '초신성 폭발'
             st.info(f"**진화 단계:** {star_state['phase']}", icon="🔥")
-            st.markdown(f"<p>격렬한 **초신성 폭발**을 일으키고, 질량에 따라 중성자별 또는 블랙홀이 됩니다.</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><span>격렬한 **초신성 폭발**을 일으키고, 질량에 따라 중성자별 또는 블랙홀이 됩니다.</span></p>", unsafe_allow_html=True)
             st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Massive_star_evolution_kor.svg/1280px-Massive_star_evolution_kor.svg.png", caption="고질량 별의 진화 과정")
     
     st.write("---")
     
     # 별의 현재 상태 정보
-    st.subheader("ℹ️ 별의 현재 정보")
+    st.markdown("<h2>ℹ️<span> 별의 현재 정보</span></h2>", unsafe_allow_html=True)
     st.write(f"**질량:** 태양의 {star_mass}배")
     st.write(f"**상대적 크기:** {star_state['size']}배")
     st.write(f"**표면 온도:** {star_state['temp']}K")
