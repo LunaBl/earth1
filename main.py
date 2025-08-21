@@ -154,11 +154,11 @@ elif st.session_state.page == "star_evolution":
                 star_state['desc'] = '수소를 소진하고 크게 팽창하여 적색 초거성이 됩니다.'
                 st.info(f"**진화 단계:** {star_state['phase']}", icon="💥")
 
-                # Matplotlib으로 별 그리기
+                # Matplotlib으로 별 그리기 (고질량 별은 붉은색 원으로 유지)
                 fig, ax = plt.subplots(figsize=(6, 6))
                 ax.set_facecolor('black')
                 ax.set_aspect('equal')
-                ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color=star_state['color']))
+                ax.add_artist(plt.Circle((0, 0), star_state['size']/100, color='red')) # 붉은색 원으로 수정
                 ax.set_xlim(-15, 15)
                 ax.set_ylim(-15, 15)
                 plt.axis('off')
