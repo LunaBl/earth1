@@ -6,7 +6,7 @@ st.set_page_config(
     layout="wide",
 )
 
-# 글자 스타일만 적용하는 CSS
+# 글자와 버튼 스타일만 적용하는 CSS
 custom_css = """
 <style>
 /* 모든 글자에 파랑-보라 그라데이션 적용 */
@@ -27,9 +27,26 @@ custom_css = """
     -webkit-text-fill-color: initial;
 }
 
-/* 버튼 스타일은 기본값으로 유지 */
-.stButton>button {
+/* 버튼 스타일을 수정하여 더 잘 보이게 만듭니다 */
+.stButton > button {
+    background-color: #1A2A4A; /* 어두운 파란색 배경 */
+    color: #E0FFFF !important; /* 글자색을 밝은 색으로 변경 */
+    border: 2px solid #4682B4; /* 테두리 색상 */
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(70, 130, 180, 0.5); /* 은은한 그림자 */
+    transition: all 0.3s ease;
     text-shadow: none;
+}
+
+/* 버튼에 마우스를 올렸을 때의 효과 */
+.stButton > button:hover {
+    background-color: #2A3A5A; /* 배경색을 더 진하게 */
+    border-color: #87CEEB; /* 테두리색을 더 밝게 */
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.8), 0 0 30px rgba(135, 206, 235, 0.5); /* 더 강한 빛 효과 */
+    transform: scale(1.05);
 }
 </style>
 """
