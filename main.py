@@ -17,32 +17,6 @@ body {
     background: #000;
 }
 
-/* 배경 이미지 및 효과 - 로컬 파일(background.jpg) 사용 */
-.stApp {
-    background: url("background.jpg") no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
-}
-
-/* 별똥별 효과 (선택사항, 성능 저하 있을 수 있음) */
-.stApp::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-    background-size: 4px 4px;
-    animation: meteor-shower 60s linear infinite;
-    z-index: 1;
-}
-
-@keyframes meteor-shower {
-    0% { background-position: 0 0; }
-    100% { background-position: 1000px 1000px; }
-}
-
 /* 제목 스타일 */
 .main-title, .star-title {
     font-size: 4rem;
@@ -113,6 +87,10 @@ st.markdown(custom_css, unsafe_allow_html=True)
 # 페이지 상태 관리
 if "page" not in st.session_state:
     st.session_state.page = "main"
+
+# 배경 이미지
+# st.image를 사용하여 이미지 표시 (상대 경로로 이미지 파일을 지정)
+st.image("background.jpg", use_column_width=True)
 
 # 메인 페이지
 if st.session_state.page == "main":
