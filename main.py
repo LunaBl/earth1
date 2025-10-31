@@ -79,6 +79,9 @@ STAR_STAGES = {
     },
     'supernova': {
         'name': '초신성 폭발', 'desc': '격렬한 **초신성 폭발**을 일으키고, 질량에 따라 중성자별 또는 블랙홀이 됩니다.'
+    },
+    'neutron_star_black_hole': {
+        'name': '중성자별 또는 블랙홀', 'desc': '초신성 폭발 후 남은 밀도가 매우 높은 잔해입니다.'
     }
 }
 
@@ -131,54 +134,71 @@ def show_star_evolution_page():
         else:
             st.session_state.star_info = {'name': '저/중질량 별', 'desc': '태양처럼 수소 핵융합을 하는 안정적인 별입니다.'}
 
+    # 주계열성 이미지 추가 (시뮬레이션 시작 시)
+    if st.session_state.star_info.get('name') in ['저/중질량 별', '고질량 별', STAR_STAGES['main_sequence']['name']]:
+         st.image("main_sequence_star.png", caption="⭐ 주계열성 (시뮬레이션 시작)") # 주계열성 이미지 추가
+    
     st.info(f"**현재 단계:** {st.session_state.star_info['name']}", icon="⭐")
 
     if st.button("🚀 진화 시작"):
         # 확률에 따른 진화 성공/실패 결정
         if random.randint(1, 100) > evolution_success_rate:
             st.error("💥 **진화 실패!** 이 별은 불안정하여 생을 마감했습니다.", icon="❗")
-            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="별의 진화가 실패하면 다양한 형태로 붕괴할 수 있습니다.")
+            st.image("star_failure.png", caption="💥 진화 실패!") # 진화 실패 이미지 추가
+            st.markdown(f"<p><span>**참고:** 불안정한 별은 붕괴하거나 예상치 못한 현상을 겪을 수 있습니다.</span></p>", unsafe_allow_html=True)
         else:
             # 질량에 따른 진화 시뮬레이션
             if star_mass <= 8:
+                # 1. 적색 거성 단계
                 stage = 'red_giant'
                 st.session_state.star_info = STAR_STAGES[stage]
                 st.info(f"**진화 단계:** {st.session_state.star_info['name']}", icon="💥")
-                
-                # 적색 거성 이미지 삽입
-                st.image('redgiantstar.png', caption="적색 거성으로 진화한 별의 모습")
+                st.image('redgiantstar.png', caption="🔥 적색 거성") # 기존 이미지
                 st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
+                # 2. 행성상 성운 및 백색 왜성 단계
                 stage = 'planetary_nebula'
                 st.session_state.star_info = STAR_STAGES[stage]
                 st.info(f"**진화 단계:** {st.session_state.star_info['name']}", icon="💫")
                 st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
-                st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Low_to_intermediate-mass_star_evolution.svg/1280px-Low_to_intermediate-mass_star_evolution.svg.png", caption="저/중질량 별의 진화 과정")
+                st.image("planetary_nebula_white_dwarf.png", caption="💫 행성상 성운 및 백색 왜성") # 행성상 성운/백색 왜성 이미지 추가
                 
             else:
+                # 1. 적색 초거성 단계
                 stage = 'red_supergiant'
                 st.session_state.star_info = STAR_STAGES[stage]
                 st.info(f"**진화 단계:** {st.session_state.star_info['name']}", icon="💥")
-
+                
                 # Matplotlib으로 별 그리기 (고질량 별은 붉은색 원으로 유지)
                 fig, ax = plt.subplots(figsize=(6, 6))
                 ax.set_facecolor('black')
                 ax.set_aspect('equal')
-                ax.add_artist(plt.Circle((0, 0), st.session_state.star_info['size']/100, color='red'))
-                ax.set_xlim(-15, 15)
-                ax.set_ylim(-15, 15)
+                # 크기를 30배로 줄여 화면에 표시
+                ax.add_artist(plt.Circle((0, 0), st.session_state.star_info['size']/30, color='red')) 
+                ax.set_xlim(-40, 40)
+                ax.set_ylim(-40, 40)
                 plt.axis('off')
                 st.pyplot(fig)
+                st.image("red_supergiant_star.png", caption="🔴 적색 초거성") # 적색 초거성 이미지 추가
                 
                 st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
 
+                # 2. 초신성 폭발 단계
                 stage = 'supernova'
                 st.session_state.star_info = STAR_STAGES[stage]
                 st.info(f"**진화 단계:** {st.session_state.star_info['name']}", icon="🔥")
                 st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
-                st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Massive_star_evolution_kor.svg/1280px-Massive_star_evolution_kor.svg.png", caption="고질량 별의 진화 과정")
+                st.image("supernova_explosion.png", caption="💥 초신성 폭발") # 초신성 폭발 이미지 추가
+
+                st.write("---")
+                # 3. 최종 잔해 (중성자별 또는 블랙홀) 단계
+                stage = 'neutron_star_black_hole'
+                st.session_state.star_info = STAR_STAGES[stage]
+                st.info(f"**최종 잔해:** {st.session_state.star_info['name']}", icon="⚫")
+                st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
+                st.image("neutron_star_black_hole.png", caption="⚫ 중성자별 또는 블랙홀") # 중성자별/블랙홀 이미지 추가
     
     st.write("---")
     
