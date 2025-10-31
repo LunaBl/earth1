@@ -1,5 +1,5 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # 이제 사용하지 않으므로, 이 줄은 지워도 되지만, 혹시 나중에 쓸 수도 있어 그대로 둡니다.
 import numpy as np
 import random
 
@@ -170,17 +170,8 @@ def show_star_evolution_page():
                 st.session_state.star_info = STAR_STAGES[stage]
                 st.info(f"**진화 단계:** {st.session_state.star_info['name']}", icon="💥")
                 
-                # Matplotlib으로 별 그리기 (고질량 별은 붉은색 원으로 유지)
-                fig, ax = plt.subplots(figsize=(6, 6))
-                ax.set_facecolor('black')
-                ax.set_aspect('equal')
-                # 크기를 30배로 줄여 화면에 표시
-                ax.add_artist(plt.Circle((0, 0), st.session_state.star_info['size']/30, color='red')) 
-                ax.set_xlim(-40, 40)
-                ax.set_ylim(-40, 40)
-                plt.axis('off')
-                st.pyplot(fig)
-                st.image("red_supergiant_star.png", caption="🔴 적색 초거성") # 적색 초거성 이미지 추가
+                # 🔴 붉은 원형 그래프 코드 제거됨
+                st.image("red_supergiant_star.png", caption="🔴 적색 초거성") # 적색 초거성 이미지 사용
                 
                 st.markdown(f"<p><span>{st.session_state.star_info['desc']}</span></p>", unsafe_allow_html=True)
                 st.write("---")
